@@ -1,0 +1,69 @@
+/*class DesafioIma extends Desafio {
+
+  String pergunta = "Tente achar a distância mínima para que o objeto seja atraído pelo ímã.\nMova o Objeto na horizontal";
+  
+  float posX = 100;  // Posição inicial do objeto
+  float imaX = 400;  // Posição do ímã
+  float imaY = 300;  // Posição do ímã (fixa)
+  float distancia = 0;  // Distância entre o ímã e o objeto
+  boolean completo = false;  // Flag para verificar se o jogo foi vencido
+
+  void setup() {
+    size(800, 600);
+    textAlign(CENTER, CENTER);
+    textSize(32);
+  }
+
+  void draw() {
+    background(255);
+    render();
+  }
+
+  void render() {
+    // Exibe as instruções
+    fill(0, 0, 0, 150);
+    rect(150, 40, width - 300, 100, 9);
+    fill(255);
+    textSize(18);
+    textAlign(CENTER);
+    text(pergunta, width / 2, 25 + 50);
+
+    // Desenha o ímã (representado por um círculo vermelho)
+    fill(255, 0, 0);
+    ellipse(imaX, imaY, 50, 50);
+    
+    // Desenha o objeto (representado por um círculo azul)
+    fill(0, 0, 255);
+    ellipse(posX, height / 2, 50, 50);
+    
+    // Calcula a distância entre o objeto e o ímã
+    distancia = abs(posX - imaX);
+    
+    // Mostra a distância na tela
+    fill(0);
+    text("Distância: " + int(distancia), width / 2, 50);
+    
+    // Verifica se a distância é igual a 10
+    if (distancia == 10 && !completo) {
+      textSize(50);
+      fill(0, 255, 0);  // Cor verde
+      text("Você venceu!", width / 2, height / 2);
+      textSize(100);
+      text("M", width / 1.5, height / 1.5);  // Letra "M" do ímã
+      completo = true;
+    }
+  }
+
+  void keyPressed() {
+    // Move o objeto para a esquerda ou direita com as teclas de seta
+    if (keyCode == LEFT) {
+      posX -= 10;
+    } else if (keyCode == RIGHT) {
+      posX += 10;
+    }
+  }
+
+  void mousePressed() {
+    // Caso precise adicionar lógica para cliques do mouse
+  }
+}*/

@@ -1,0 +1,193 @@
+import java.time.LocalDateTime;
+class DesafioDaVerdade extends Desafio {
+  String pergunta = "  Posicione o espelho para direcionar o feixe de luz\n    até que passe pelo centro do sensor.\n    Tenha em vista que é um espelho plano.";
+  String resposta = "sim";
+  boolean completo = false; 
+  FaseJogo faseJogo;
+
+  Espelho espelho;
+  Sensor sensor;
+  FeixeDeLuz feixeDeLuz;
+
+  Espelho espelhoSelecionado = null;
+  float raioEsfera = 200;
+  float centroEsferaX, centroEsferaY;
+
+  DesafioDaVerdade(FaseJogo faseJogo) {
+    this.faseJogo = faseJogo; 
+    centroEsferaX = width / 2;
+    centroEsferaY = height / 2;
+    espelho = new Espelho(200, 200);
+    sensor = new Sensor(400, 300);
+    feixeDeLuz = new FeixeDeLuz(240, 200, 8, 2); // Ajustado para não começar sobre o sensor
+  }
+
+  void render() {
+    noFill();
+    stroke(0, 150, 0);
+    strokeWeight(3);
+    ellipse(centroEsferaX, centroEsferaY, raioEsfera * 2, raioEsfera * 2);
+
+    fill(0, 0, 0, 150);
+    rect(150, 40, width - 300, 100, 9);
+    fill(255);
+    textSize(18);
+    textAlign(CENTER);
+    text(pergunta, width / 2, 25 + 50);
+
+    espelho.render();
+    sensor.render();
+    feixeDeLuz.atualizar(espelho, sensor, centroEsferaX, centroEsferaY, raioEsfera);
+    feixeDeLuz.render();
+
+    // Exibir a letra "S" se o feixe atingir o sensor
+    if (completo) {
+      textSize(100);
+      textAlign(CENTER, CENTER);
+      fill(255, 0, 0); // Cor vermelha
+      text("S", width / 1.5, height / 1.5); // Exibir "S" no centro da tela
+    }
+  }
+
+  // Posiciona o espelho ao dar o clique no mouse
+  void mousePressed() {
+    if (completo) return;
+    espelhoSelecionado = espelho;
+    espelhoSelecionado.mover(mouseX, mouseY, centroEsferaX, centroEsferaY, raioEsfera);
+   
+  }
+
+  void keyPressed(char key) { }
+}
+
+class Espelho {
+  float x, y;
+  float largura = 20, altura = 30;
+
+  Espelho(float x, float y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  void render() {
+    fill(0, 0, 255);
+    rect(x - largura / 2, y - altura / 2, largura, altura);
+  }
+
+  void mover(float novoX, float novoY, float centroX, float centroY, float raio) {
+    if (dist(novoX, novoY, centroX, centroY) <= raio) {
+      this.x = novoX;
+      this.y = novoY;
+    }
+  }
+
+  boolean foiClicado(float mouseX, float mouseY) {
+    return mouseX > x - largura / 2 && mouseX < x + largura / 2 && mouseY > y - altura / 2 && mouseY < y + altura / 2;
+  }
+
+  PVector normal() {
+    return new PVector(0, -1); // Normal no eixo Y (espelho horizontal)
+  }
+}
+
+class Sensor {
+  float x, y;
+
+  Sensor(float x, float y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  void render() {
+    fill(255, 0, 0);
+    ellipse(x, y, 50, 50); 
+  }
+}class FeixeDeLuz {
+  float x, y, dirX, dirY;
+
+  FeixeDeLuz(float x, float y, float dirX, float dirY) {
+    this.x = x;
+    this.y = y;
+    this.dirX = dirX;
+    this.dirY = dirY;
+  }
+
+  void atualizar(Espelho espelho, Sensor sensor, float centroX, float centroY, float raio) {
+    float novoX = x + dirX;
+    float novoY = y + dirY;
+    String msg = "Dist: ";
+    msg = msg + String.valueOf(dist(x, y, espelho.x, espelho.y));
+    msg = msg +" / Espelho largura/2: : " + String.valueOf(espelho.largura);
+    text(msg, width / 1.5, height / 1.5);
+    // Verifica colisão com o espelho  espelho.largura / 2
+    if (dist(x, y, espelho.x, espelho.y) < 20) {
+      text("refletiu", width / 1.4, height / 1.4);
+      refletir(espelho);
+    }
+
+    // Atualizar posição do feixe
+    if (dist(novoX, novoY, centroX, centroY) <= raio) {
+      x = novoX;
+      y = novoY;
+    } else {
+      dirX = -dirX;
+      dirY = -dirY;
+    }
+
+    if (x < 0 || x > width) dirX = -dirX;
+    if (y < 0 || y > height) dirY = -dirY;
+  }
+
+void refletir(Espelho espelho) {
+  
+  
+  // Normal do espelho
+  PVector normal = espelho.normal();
+
+  // Vetor do ponto de origem até o espelho
+  PVector origem = new PVector(dirX, dirY);
+  PVector espelhoPos = new PVector(espelho.x, espelho.y);
+  PVector vetorOrigemEspelho = origem.sub(espelhoPos);
+
+  // Projeção do vetor origem-espelho na normal
+  float projecao = vetorOrigemEspelho.dot(normal);
+
+  // Calcula o ponto refletido
+  PVector pontoRefletido = origem.sub(normal.mult(2 * projecao));
+
+  // Atualiza a posição do ponto refletido
+  float novoX = pontoRefletido.x;
+  float novoY = pontoRefletido.y;
+  
+  dirX = pontoRefletido.x;
+  dirY = pontoRefletido.y;
+
+  // Aqui você pode usar o novoX e novoY para fazer algo no jogo, como mover um objeto ou desenhar o ponto refletido
+  System.out.println("Novo ponto refletido: (" + novoX + ", " + novoY + ")" + LocalDateTime.now() );
+}
+
+
+
+
+  void refletir2(Espelho espelho) {
+    PVector normal = espelho.normal();
+    PVector direcao = new PVector(dirX, dirY);
+    // Cálculo da reflexão considerando o ângulo de incidência e reflexão
+    float dot = 2 * direcao.dot(normal);
+    direcao.sub(normal.mult(dot)); // Reflete a direção do feixe
+
+    dirX = direcao.x;
+    dirY = direcao.y;
+    
+    // Para garantir que o feixe não atravesse o espelho, ajustamos sua posição
+    // Para evitar que o feixe continue além do espelho após a reflexão
+    x = espelho.x + normal.x * espelho.largura / 2;
+    y = espelho.y + normal.y * espelho.largura / 2;
+  }
+
+  void render() {
+    noStroke(); // Remove as bordas do círculo
+    fill(255, 255, 0); // Define a cor do preenchimento como amarelo
+    ellipse(x, y, 15, 15); // Desenha o círculo preenchido com 15 de largura e altura
+  }
+}

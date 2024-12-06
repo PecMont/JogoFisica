@@ -1,5 +1,5 @@
 abstract class Desafio{
-  boolean completo= false;
+  public boolean completo= false;
   
   abstract void render();  //Montar desafio
   abstract void mousePressed();  //Verifica clique com o Mouse
