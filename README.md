@@ -228,7 +228,7 @@ Neste desafio, o jogador deve calcular a distância correta entre duas cargas pa
 - **pergunta:** Pergunta que envolve o cálculo da força elétrica com base na distância entre duas cargas.
 - **tentativa:** Armazena a tentativa de resposta do jogador.
 - **posX:** **Posição X** do objeto no cenário.
-- **imaX, imaY:** Posição do ímã no cenário.
+- **imaX, imaY:** Variáveis para auxiliar alinhamento da fórmula.
 - **desafioCompleto:** Indica se o desafio foi completado.
 - **mostrarLetra:** Indica se a letra misteriosa deve ser exibida.
 - **faseJogo:** Referência à fase do jogo associada a este desafio.
