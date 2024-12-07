@@ -35,10 +35,10 @@ class Sala {
   //  for(PVector ponto : pontosDeAtivacao){
   //    ellipse(ponto.x, ponto.y, ponto.z, ponto.z);
   //  }
-  //  // Escrever pergunta para o desafio com caixa
-  //  if (!desafiosIniciados[desafioAtual]) {
-  //    drawTextBox("Dica: " + perguntas[desafioAtual], 95, height - 80, width - 190, 60);
-  //  }
+    // Escrever pergunta para o desafio com caixa
+    if (!desafiosIniciados[desafioAtual]) {
+      drawTextBox("Dica: " + perguntas[desafioAtual], 95, height - 80, width - 190, 60);
+    }
 
     // Renderização do desafio
     if (desafiosIniciados[desafioAtual]) {

@@ -7,9 +7,7 @@ void setup(){
   //Carregando backgrounds
   backgrounds = new PImage[3];
     backgrounds[0] = loadImage("imagemInicio2.png");
-    backgrounds[1] = loadImage("sala2.png");
-    backgrounds[2] = loadImage("sala3.png");
-    
+
   controlador= new ControladorDeFase(null);
   controlador.setFase(new MenuInicial(controlador));
 }

@@ -5,10 +5,7 @@ class DesafioResistor extends Desafio{
   boolean venceu = false; // condição de vitória
   int valorFixo = 50; // Definindo o valor fixo dos resistores
   
-   FaseJogo faseJogo;
-  
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////RESPOSTA TUDO PARAELEO
-
+  FaseJogo faseJogo;
   
   DesafioResistor(FaseJogo faseJogo){
     for (int i = 0; i < resistores.length; i++) {

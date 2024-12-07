@@ -12,16 +12,13 @@ class FaseFinal extends Fase {
 
   
 
-  void handleMousePressed(float x, float y) {
-    // A função não está sendo usada no momento, mas pode ser expandida mais tarde
-  }
+  void handleMousePressed(float x, float y) {}
   
   void handleKeyPressed(char key) {
     // Adiciona a letra digitada à tentativa
     if (Character.isLetterOrDigit(key)) {
         tentativa += key;
     } else if (key == BACKSPACE && tentativa.length() > 0) {
-        // Remove o último caractere se o BACKSPACE for pressionado
         tentativa = tentativa.substring(0, tentativa.length() - 1);
     }
 
@@ -70,6 +67,7 @@ void render() {
         tempoExibicaoDistancia = millis();
         countdown--;
         }
+        
         fill(0, 0, 0, 150); // Fundo semitransparente
         noStroke();
         rect(270, 540, 290, 100, 10); // Caixa com cantos arredondados
@@ -79,7 +77,7 @@ void render() {
         text(countdown, 500, 568);
         
         if (countdown < 0) {
-            // Após 2 segundos, muda para o menu inicial
+            // Após 10 segundos, muda para o menu inicial
             exibindoDistancia = false;
             controlador.setFase(new MenuInicial(controlador));
             

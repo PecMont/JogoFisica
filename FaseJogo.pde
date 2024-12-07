@@ -4,8 +4,7 @@ class FaseJogo extends Fase{
   FaseJogo(ControladorDeFase controlador){
     super(controlador);
     
-    //Configurar SALAS
-    //SALA 1
+    //Configurar SALA
     gerenciador = new GerenciadorDeSala();
     gerenciador.addSala(new Sala(
       backgrounds[0],  //Fundo padrão
@@ -14,7 +13,7 @@ class FaseJogo extends Fase{
       new PVector[]{
         new PVector(533, 150, 110), // Espelho
         new PVector(435, 315, 45), // Disjuntor
-        new PVector(570, 468, 27)  // FE
+        new PVector(570, 468, 27)  // Gaveta
       },
       new String[]{"Espelho, espelho meu, quem é mais bela do que eu?", "Quem acende uma luz é o primeiro a se beneficiar da claridade.", "Um é pouco, dois é bom, três é demais!"}
     ));

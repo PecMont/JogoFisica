@@ -1,24 +1,20 @@
 class DesafioFE extends Desafio { 
   String resposta = "sim";
   String respostaM = "M";
-    int distancia = 20; // Valor correto para o desafio
+    int distancia = 200; // Valor correto para o desafio
     float posX = 100; // Posição inicial do objeto
     float imaX = 400; // Posição do ímã
     float imaY = 300; // Posição do ímã
     boolean desafioCompleto = false; // Flag para verificar se o jogo foi vencido
     boolean mostrarLetra = false; // Flag para controlar exibição da letra misteriosa
 
-    String pergunta = "            Digite a distância em metros para que a Força Elétrica \n      seja = 8.9×10^7 N.\n         q1 = 2C e q2 = 2C  ";
+    String pergunta = "            Digite a distância em metros para que a Força Elétrica \n      seja = 8.9×10^7 N.\n         q1 = 2C e q2 = 2C  K = 8,9×10^9";
     String tentativa = ""; // Valor atual da tentativa convertida
 
     int tempoExibicao = 0; // Armazena o tempo para exibir a letra misteriosa
     PImage reguaImg; // Variável para armazenar a imagem da régua
     FaseJogo faseJogo;
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////RESPOSTA = 20
-
-
-    // Construtor
     DesafioFE (FaseJogo faseJogo) {
         this.faseJogo = faseJogo;
     }
@@ -64,13 +60,12 @@ class DesafioFE extends Desafio {
         
         
         // Verifica se a tentativa está correta
-        if (tentativa.equals("20")) {
+        if (tentativa.equals("200")) {
             fill(255);
             textSize(20);
             text("Letra misteriosa: M\n  Clique para continuar.", width / 1.2, height / 1.5);
-       
+     
             desafioCompleto = true;
-            //completo = true;
         }
         
         
@@ -79,15 +74,10 @@ class DesafioFE extends Desafio {
 
 
       void keyPressed(char key) { 
-          //if(completo) return;
-      
           if(key == BACKSPACE && tentativa.length() > 0){
             tentativa = tentativa.substring(0, tentativa.length() - 1);
           }else if(key == ENTER){
             if(tentativa.equals(respostaM)){
-              
-              //desafioCompleto = true;
-              //completo = true;
             }
           }else if(key != BACKSPACE){
             tentativa += key;
@@ -101,8 +91,5 @@ class DesafioFE extends Desafio {
         if(desafioCompleto){
           completo= true;
         }
-        // if (completo) return;
     }
-
-
 }

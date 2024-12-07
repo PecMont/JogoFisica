@@ -8,8 +8,6 @@ class DesafioDaVerdade extends Desafio {
   String respostaS = "S";
   String tentativa = "";
   
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////RESPOSTA = 32
-
   DesafioDaVerdade(FaseJogo faseJogo) {
     this.faseJogo = faseJogo; 
 
@@ -32,7 +30,7 @@ class DesafioDaVerdade extends Desafio {
         text(tentativa, 295, 551);
 
         // Verifica se a tentativa está correta
-        if (tentativa.equals("32")) {
+        if (tentativa.equals("33,83") || tentativa.equals("33.83")) {
             fill(100);
             stroke(0);
             rect(565, 530, 210, 55);
@@ -49,7 +47,7 @@ class DesafioDaVerdade extends Desafio {
         rect(width / 2 - 200, height - 450, 400, 50); 
         fill(225);
         textSize(18);
-        text("n1 . sen(theta1) = n2 . sen(theta2)", 405,180);
+        text("n1 . sen(θ1) = n2 . sen(θ2)", 405,180);
 
     
   }
